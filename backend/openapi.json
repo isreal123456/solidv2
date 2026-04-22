@@ -1,0 +1,1105 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Solid Tech Backend API",
+    "description": "Backend API contract for frontend mock replacement.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login",
+        "operationId": "login_api_v1_auth_login_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Logout",
+        "operationId": "logout_api_v1_auth_logout_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogoutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/sales": {
+      "get": {
+        "tags": [
+          "Sales"
+        ],
+        "summary": "Get Sales",
+        "operationId": "get_sales_api_v1_sales_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "staffName",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Staffname"
+            }
+          },
+          {
+            "name": "drinkName",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Drinkname"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fromdate"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Todate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sales"
+        ],
+        "summary": "Create Sale",
+        "operationId": "create_sale_api_v1_sales_post",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSaleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/stock": {
+      "get": {
+        "tags": [
+          "Stock"
+        ],
+        "summary": "Get Stock",
+        "operationId": "get_stock_api_v1_stock_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Stock"
+        ],
+        "summary": "Create Drink",
+        "operationId": "create_drink_api_v1_stock_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDrinkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/stock/{drink_id}/quantity": {
+      "patch": {
+        "tags": [
+          "Stock"
+        ],
+        "summary": "Update Stock Quantity",
+        "operationId": "update_stock_quantity_api_v1_stock__drink_id__quantity_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "drink_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Drink Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDrinkQuantityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/stock/{drink_id}/alert-level": {
+      "patch": {
+        "tags": [
+          "Stock"
+        ],
+        "summary": "Update Stock Alert Level",
+        "operationId": "update_stock_alert_level_api_v1_stock__drink_id__alert_level_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "drink_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Drink Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDrinkAlertLevelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/staff": {
+      "get": {
+        "tags": [
+          "Staff"
+        ],
+        "summary": "Get Staff",
+        "operationId": "get_staff_api_v1_staff_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Staff"
+        ],
+        "summary": "Create Staff",
+        "operationId": "create_staff_api_v1_staff_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStaffRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/staff/{staff_id}": {
+      "delete": {
+        "tags": [
+          "Staff"
+        ],
+        "summary": "Delete Staff",
+        "operationId": "delete_staff_api_v1_staff__staff_id__delete",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "staff_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Staff Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/staff/{staff_id}/pin": {
+      "patch": {
+        "tags": [
+          "Staff"
+        ],
+        "summary": "Update Staff Pin",
+        "operationId": "update_staff_pin_api_v1_staff__staff_id__pin_patch",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "staff_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Staff Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStaffPinRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/logs": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "summary": "Get Logs",
+        "operationId": "get_logs_api_v1_logs_get",
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "staffName",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Staffname"
+            }
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Action"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Date"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Fromdate"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Todate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/settings": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Get Settings",
+        "operationId": "get_settings_api_v1_settings_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/settings/shop-name": {
+      "patch": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Update Shop Name",
+        "operationId": "update_shop_name_api_v1_settings_shop_name_patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShopNameRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/settings/categories": {
+      "patch": {
+        "tags": [
+          "Settings"
+        ],
+        "summary": "Update Categories",
+        "operationId": "update_categories_api_v1_settings_categories_patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoriesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/v1/export/snapshot": {
+      "get": {
+        "tags": [
+          "Export"
+        ],
+        "summary": "Export Snapshot",
+        "operationId": "export_snapshot_api_v1_export_snapshot_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateDrinkRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "category": {
+            "type": "string",
+            "title": "Category"
+          },
+          "price": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Price"
+          },
+          "stock": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Stock"
+          },
+          "alertLevel": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Alertlevel"
+          },
+          "staffName": {
+            "type": "string",
+            "title": "Staffname"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "category",
+          "price",
+          "stock",
+          "alertLevel",
+          "staffName"
+        ],
+        "title": "CreateDrinkRequest"
+      },
+      "CreateSaleRequest": {
+        "properties": {
+          "staffId": {
+            "type": "string",
+            "title": "Staffid"
+          },
+          "staffName": {
+            "type": "string",
+            "title": "Staffname"
+          },
+          "drinkId": {
+            "type": "string",
+            "title": "Drinkid"
+          },
+          "quantity": {
+            "type": "integer",
+            "exclusiveMinimum": 0.0,
+            "title": "Quantity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "staffId",
+          "staffName",
+          "drinkId",
+          "quantity"
+        ],
+        "title": "CreateSaleRequest"
+      },
+      "CreateStaffRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "pin": {
+            "type": "string",
+            "title": "Pin"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "pin",
+          "role"
+        ],
+        "title": "CreateStaffRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "LoginRequest": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "pin": {
+            "type": "string",
+            "title": "Pin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "pin"
+        ],
+        "title": "LoginRequest"
+      },
+      "LogoutRequest": {
+        "properties": {
+          "staffName": {
+            "type": "string",
+            "title": "Staffname"
+          }
+        },
+        "type": "object",
+        "required": [
+          "staffName"
+        ],
+        "title": "LogoutRequest"
+      },
+      "UpdateCategoriesRequest": {
+        "properties": {
+          "categories": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Categories"
+          }
+        },
+        "type": "object",
+        "required": [
+          "categories"
+        ],
+        "title": "UpdateCategoriesRequest"
+      },
+      "UpdateDrinkAlertLevelRequest": {
+        "properties": {
+          "alertLevel": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Alertlevel"
+          },
+          "staffName": {
+            "type": "string",
+            "title": "Staffname"
+          }
+        },
+        "type": "object",
+        "required": [
+          "alertLevel",
+          "staffName"
+        ],
+        "title": "UpdateDrinkAlertLevelRequest"
+      },
+      "UpdateDrinkQuantityRequest": {
+        "properties": {
+          "newQuantity": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Newquantity"
+          },
+          "staffName": {
+            "type": "string",
+            "title": "Staffname"
+          }
+        },
+        "type": "object",
+        "required": [
+          "newQuantity",
+          "staffName"
+        ],
+        "title": "UpdateDrinkQuantityRequest"
+      },
+      "UpdateShopNameRequest": {
+        "properties": {
+          "shopName": {
+            "type": "string",
+            "title": "Shopname"
+          }
+        },
+        "type": "object",
+        "required": [
+          "shopName"
+        ],
+        "title": "UpdateShopNameRequest"
+      },
+      "UpdateStaffPinRequest": {
+        "properties": {
+          "newPin": {
+            "type": "string",
+            "title": "Newpin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "newPin"
+        ],
+        "title": "UpdateStaffPinRequest"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

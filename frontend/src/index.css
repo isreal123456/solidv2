@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --brand: #16a34a;
+  --brand-ink: #166534;
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --stroke: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 10% -20%, #dcfce7 0%, transparent 42%),
+    radial-gradient(circle at 100% -10%, #dbeafe 0%, transparent 35%),
+    #f1f5f9;
+  color: #0f172a;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
