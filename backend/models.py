@@ -1,4 +1,4 @@
-from typing import Union
+from __future__ import annotations
 
 from sqlalchemy import Boolean, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
@@ -33,7 +33,7 @@ class Sale(Base):
     id: Mapped[str] = mapped_column(String, primary_key=True)
     staffId: Mapped[str] = mapped_column(String, index=True)
     staffName: Mapped[str] = mapped_column(String)
-    customerName: Mapped[Union[str, None]] = mapped_column(String, nullable=True)
+    customerName: Mapped[str | None] = mapped_column(String, nullable=True)
     drinkId: Mapped[str] = mapped_column(String, index=True)
     drinkName: Mapped[str] = mapped_column(String)
     quantity: Mapped[int] = mapped_column(Integer)
