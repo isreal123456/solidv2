@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 // API base URL - can be configured via environment variable
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:8000' : 'https://solidv2-5ah5.onrender.com')
 
 // Create axios instance
 const api = axios.create({
