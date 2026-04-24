@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import StockTable from '../../components/admin/StockTable'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
@@ -23,12 +23,27 @@ export default function StockManagement() {
   const [newDrink, setNewDrink] = useState(initialDrink)
   const [selectedCategory, setSelectedCategory] = useState('')
   const [customCategory, setCustomCategory] = useState('')
+  const [savedCategories, setSavedCategories] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
   const [filterCategory, setFilterCategory] = useState('all')
   const [statusFilter, setStatusFilter] = useState('all')
   const [showLowStockOnly, setShowLowStockOnly] = useState(false)
 
-  const categoryOptions = Array.from(new Set(stock.map((drink) => drink.category))).sort()
+  const stockCategories = Array.from(new Set(stock.map((drink) => drink.category))).sort()
+  const addCategoryOptions = Array.from(new Set((savedCategories.length > 0 ? savedCategories : stockCategories))).sort()
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await api.getSettings()
+        setSavedCategories(Array.isArray(data?.categories) ? data.categories : [])
+      } catch {
+        setSavedCategories([])
+      }
+    }
+
+    void loadCategories()
+  }, [])
 
   const filteredStock = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase()
@@ -108,6 +123,12 @@ export default function StockManagement() {
       setNewDrink(initialDrink)
       setSelectedCategory('')
       setCustomCategory('')
+      try {
+        const settings = await api.getSettings()
+        setSavedCategories(Array.isArray(settings?.categories) ? settings.categories : [])
+      } catch {
+        // Keep the existing category list if settings cannot be reloaded.
+      }
       await refresh()
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unable to add drink'
@@ -158,7 +179,7 @@ export default function StockManagement() {
               className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
             >
               <option value="all">All categories</option>
-              {categoryOptions.map((category) => (
+              {stockCategories.map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
@@ -217,7 +238,7 @@ export default function StockManagement() {
                 className="rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
               >
                 <option value="">Select category</option>
-                {categoryOptions.map((category) => (
+                {addCategoryOptions.map((category) => (
                   <option key={category} value={category}>
                     {category}
                   </option>

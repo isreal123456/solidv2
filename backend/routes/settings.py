@@ -26,6 +26,7 @@ def update_shop_name(payload: UpdateShopNameRequest, _: dict = Depends(require_u
 
 @router.patch("/categories")
 def update_categories(payload: UpdateCategoriesRequest, _: dict = Depends(require_user), db: Session = Depends(get_db)):
-    set_setting(db, "categories", json.dumps(payload.categories))
+    normalized_categories = list(dict.fromkeys(str(item).strip() for item in payload.categories if str(item).strip()))
+    set_setting(db, "categories", json.dumps(normalized_categories))
     db.commit()
-    return {"categories": payload.categories}
+    return {"categories": normalized_categories}

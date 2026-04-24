@@ -1,3 +1,5 @@
+import json
+
 from fastapi import APIRouter, Depends, Query, status
 from sqlalchemy.orm import Session
 
@@ -5,7 +7,7 @@ from database import get_db
 from models import Drink
 from schemas import CreateDrinkRequest, UpdateDrinkActiveRequest, UpdateDrinkAlertLevelRequest, UpdateDrinkQuantityRequest
 from utils.auth import require_user
-from utils.helpers import append_log, drink_dict, find_drink_by_id, make_id, raise_api_error
+from utils.helpers import append_log, drink_dict, find_drink_by_id, get_settings_map, make_id, raise_api_error, set_setting
 
 
 router = APIRouter(prefix="/api/v1/stock", tags=["Stock"])
@@ -63,6 +65,12 @@ def create_drink(payload: CreateDrinkRequest, _: dict = Depends(require_user), d
         isActive=True,
     )
     db.add(drink)
+
+    settings = get_settings_map(db)
+    next_categories = list(settings.get("categories", []))
+    if drink.category not in next_categories:
+        next_categories.append(drink.category)
+        set_setting(db, "categories", json.dumps(next_categories))
 
     append_log(db, payload.staffName, "stock.create", f"Created drink {payload.name}")
     db.commit()
